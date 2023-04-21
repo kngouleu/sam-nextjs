@@ -1,0 +1,17 @@
+Redux
+
+* Cart
+addCart -> quantity
+
+* Product
+
+Pages
+Help
+Copywriting
+Product Category
+Buy Product
+ * Payment platform
+Animation
+
+Log in/Membership
+ with Facebook
