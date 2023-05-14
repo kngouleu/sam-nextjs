@@ -6,14 +6,12 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as T from '@/styles/tunnel.styles';
 import * as S from '@/styles/GuestCheckout.styles';
+import ProductCheckout from '@/components/ProductCheckout/ProductCheckout';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store/configureStore';
+import { FormData } from '@/types/types';
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-  address: string;
-  email: string;
-  phoneNumber: string;
-};
+
 
 const GuestCheckoutPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -25,6 +23,10 @@ const GuestCheckoutPage: React.FC = () => {
   });
   const [showAddressConfirmation, setShowAddressConfirmation] = useState(false);
   const router = useRouter();
+  const cart = useSelector((state: RootState) => state.cart.cartItems);
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  console.log(cart)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,11 +43,13 @@ const GuestCheckoutPage: React.FC = () => {
     router.push('/checkout/payment');
   };
 
+  const handleEdit = () => {
+    router.push('/cart')
+  }
   return (
     <>
         <S.PageContainer>
         <S.MainContent>
-
             <S.CheckoutTitle>Checkout</S.CheckoutTitle>
             <S.CheckoutBlock>
                 <S.Delivery>
@@ -57,24 +61,17 @@ const GuestCheckoutPage: React.FC = () => {
                     
                     {!showAddressConfirmation ? (
                     <S.DeliveryForm onSubmit={handleSubmit}>
-                        {/* Add your form fields here */}
-                        {/* <S.DeliveryLabel htmlFor="firstName">First Name</S.DeliveryLabel> */}
-                        
                         <S.NameInfoContainer>
                             <S.DeliveryInput type="text" id="firstName" name="firstName" placeholder='First Name*' value={formData.firstName} onChange={handleChange} required />
                             
-                            {/* <S.DeliveryLabel htmlFor="lastName">Last Name</S.DeliveryLabel> */}
                             <S.DeliveryInput type="text" id="lastName" name="lastName" placeholder='Last Name*' value={formData.lastName} onChange={handleChange} required />
                         </S.NameInfoContainer>
-                        {/* <S.DeliveryLabel htmlFor="address">Address</S.DeliveryLabel> */}
                         <S.DeliveryInput type="text" id="address" name="address" placeholder='Address*' value={formData.address} onChange={handleChange} required />
 
-                        {/* <S.DeliveryLabel htmlFor="email">Email *</S.DeliveryLabel> */}
 
                         <S.ContactInfoContainer>
                             <S.DeliveryInput type="email" id="email" name="email" placeholder='Email*' value={formData.email} onChange={handleChange} required />
 
-                            {/* <S.DeliveryLabel htmlFor="phoneNumber">Phone Number *</S.DeliveryLabel> */}
                             <S.DeliveryInput type="tel" id="phoneNumber" name="phoneNumber" placeholder='Phone Number*' value={formData.phoneNumber} onChange={handleChange} required />
                         </S.ContactInfoContainer>
                         <S.DeliveryFormButtonContainer>
@@ -98,188 +95,33 @@ const GuestCheckoutPage: React.FC = () => {
                     <S.Bag>
                         <S.BagTitleContainer>
                             <S.BagTitle>In Your Bag</S.BagTitle>
-                            <S.BagTitleEdit>Edit</S.BagTitleEdit>
+                            <S.BagTitleEdit onClick={handleEdit}>Edit</S.BagTitleEdit>
                         </S.BagTitleContainer>
                         
                         <S.BagPriceInfo>
                                 <S.BagPrice>
                                     <S.BagPriceTitle>Subtotal</S.BagPriceTitle>
-                                    <S.BagAmount>$999</S.BagAmount>
+                                    <S.BagAmount>${totalPrice.toFixed(2)}</S.BagAmount>
                                 </S.BagPrice>
                                 <S.BagPrice>
                                     <S.BagPriceTitle>Estimated Shipping</S.BagPriceTitle>
-                                    <S.BagAmount>$999</S.BagAmount>
+                                    <S.BagAmount>${totalPrice.toFixed(2)}</S.BagAmount>
                                 </S.BagPrice>
                                 <S.BagPrice>
                                     <S.BagPriceTitle>Estimated Tax</S.BagPriceTitle>
-                                    <S.BagAmount>$999</S.BagAmount>
+                                    <S.BagAmount>${totalPrice.toFixed(2)}</S.BagAmount>
                                 </S.BagPrice>
                                 <S.BagPrice>
                                     <S.BagPriceTitle>Total</S.BagPriceTitle>
-                                    <S.BagAmount>$999</S.BagAmount>
+                                    <S.BagAmount>${totalPrice.toFixed(2)}</S.BagAmount>
                                 </S.BagPrice>
                         </S.BagPriceInfo>
                             <h3>Arrives by Fri, Apr 14</h3>
                             <S.BagProductList>
                                 <S.ProductReview>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                            <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
-                                    <S.Product>
-                                        <S.ProductImage>
-                                        </S.ProductImage>
-                                        <S.ProdutCaracteristic>
-                                        <S.ProductName>Iphone</S.ProductName>
-                                            <S.ProductAmount>
-                                                Qty: X
-                                            </S.ProductAmount>
-                                            <S.ProductPrice>
-                                                $999
-                                            </S.ProductPrice>
-                                        </S.ProdutCaracteristic>
-                                    </S.Product>
+                                    <ProductCheckout items={cart} />
                                 </S.ProductReview>
-                            </S.BagProductList>
+                        </S.BagProductList>
                     </S.Bag>
                 </S.BagContainer>
             </S.CheckoutBlock>

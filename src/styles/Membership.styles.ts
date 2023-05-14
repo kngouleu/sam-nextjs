@@ -11,7 +11,6 @@ export const Body = styled.div`
 export const MembershipContainer = styled.div`
   padding: 1rem;
   width: 20rem;
-  // max-width: 400px;
   margin: 2rem auto;
   flex: 1;
 `;

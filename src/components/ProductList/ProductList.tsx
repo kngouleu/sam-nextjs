@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { db, app } from '@/utils/firestore';
-import { Product } from '@/types/firestore';
+import { db, app } from '@/firebase/firebaseConfig';
+import { Product } from '@/types/types';
 import ProductCard from '../ProductCard/ProductCard';
 import * as S from './ProductList.styles';
 import Link from 'next/link';
-import { Firestore } from 'firebase/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 
 interface ProductListProps {
-  onAddToCart: (productId: string) => void;
+  filteredProducts: Product[];
 }
 
-const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
+const ProductList: React.FC<ProductListProps> = ({filteredProducts}) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -27,6 +26,7 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
           description: data.description,
           price: data.price,
           imageUrl: data.imageUrl,
+          userId: data.userId
         });
       });
       
@@ -39,10 +39,10 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
   return (
     <S.ProductList>
       <S.ProductRow>
-        {products.map((product) => (
-          <Link href={`/products/${product.id}`} key={product.id}  passHref>
+        {filteredProducts.map((product) => (
+          <Link href={`/products/${product.id}`} key={product.id} passHref>
             <S.StyledLink>
-              <ProductCard product={product} onAddToCart={onAddToCart} />
+              <ProductCard product={product} />
             </S.StyledLink>
           </Link>
         ))}

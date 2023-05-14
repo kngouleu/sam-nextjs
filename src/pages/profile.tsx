@@ -9,50 +9,64 @@ import Link from 'next/link';
 const ProfilePage: React.FC = () => {
   const { user } = useUser();
   const [balance, setBalance] = useState<number | null>(null);
+  const router = useRouter();
 
-  // Fetch the user's balance from your backend
   async function fetchBalance() {
-    // Replace this URL with the URL to your actual backend endpoint
-    const response = await fetch('/api/user-balance?userId=' + user?.uid);
-    const data = await response.json();
-    setBalance(data.balance);
+    try {
+      const response = await fetch('/api/user-balance?userId=' + user?.uid);
+      const data = await response.json();
+      setBalance(data.balance);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  // Handle withdrawal request
   async function handleWithdraw() {
-    // Call your backend to initiate the withdrawal process
-    // Replace this URL with the URL to your actual backend endpoint
-    const response = await fetch('/api/withdraw?userId=' + user?.uid);
-    const data = await response.json();
+    try {
+      const response = await fetch('/api/withdraw?userId=' + user?.uid);
+      const data = await response.json();
 
-    if (data.success) {
-      alert('Withdrawal request submitted successfully.');
-      setBalance(0);
-    } else {
-      alert('Error submitting the withdrawal request.');
+      if (data.success) {
+        alert('Withdrawal request submitted successfully.');
+        setBalance(0);
+      } else {
+        alert('Error submitting the withdrawal request.');
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
   return (
-    <S.Body>
+    <S.PageContainer>
       <Header />
-      <S.ProfileContainer>
-        <h1>Profile</h1>
-        {user && (
-          <>
-            <p>Name: {user.displayName}</p>
-            <p>Email: {user.email}</p>
-            <p>UID: {user.uid}</p>
-            <p>Balance: ${balance}</p>
+
+      <S.MainContent>
+        <S.ProfileContainer>
+          <h1>{user?.displayName}</h1>
+          <S.InfoList>
+            <S.InfoItem>
+              <S.InfoLabel>Email:</S.InfoLabel> {user?.email}
+            </S.InfoItem>
+            <S.InfoItem>
+              <S.InfoLabel>UID:</S.InfoLabel> {user?.uid}
+            </S.InfoItem>
+            <S.InfoItem>
+              <S.InfoLabel>Balance:</S.InfoLabel> ${balance || 'loading...'}
+            </S.InfoItem>
+          </S.InfoList>
+          <S.ButtonContainer>
             <S.WithdrawButton onClick={handleWithdraw}>Withdraw</S.WithdrawButton>
-            <Link href="/products/MyProductsPage">
-              <S.MyProductsLink>My Products</S.MyProductsLink>
-            </Link>
-          </>
-        )}
-      </S.ProfileContainer>
+            <S.AddProductButton onClick={() => router.push('/products/AddProductPage')}>Add Product</S.AddProductButton>
+          </S.ButtonContainer>
+          <Link href="/products/MyProductsPage">
+            <S.MyProductsLink>My Products</S.MyProductsLink>
+          </Link>
+        </S.ProfileContainer>
+      </S.MainContent>
+
       <Footer />
-    </S.Body>
+    </S.PageContainer>
   );
 };
 

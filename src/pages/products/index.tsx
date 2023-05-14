@@ -1,20 +1,15 @@
 import { GetStaticProps, NextPage } from 'next';
-import { sanityClient } from '@/utils/client';
 import { ProductCard } from '@/components/ProductCard/ProductCard';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-// import { Product } from '@/types/sanity';
 import ProductList from '@/components/ProductList/ProductList';
 import * as S from '@/styles/Home.styles';
 import React, { useEffect, useState } from 'react';
 import SearchForm from '@/components/Search/SearchForm';
 import { fetchProducts } from '@/utils/product';
-import { Product } from '@/types/firestore';
+import { Product } from '@/types/types';
+import { Props } from '@/types/types';
 
-
-type Props = {
-  products: Product[];
-};
 
 interface SearchProps {
   onSearch: (searchTerm: string) => Promise<void>;
@@ -24,8 +19,6 @@ const Products: NextPage<Props> = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
 
-  // const [products, setProducts] = useState<{ id: string; }[]>([]);
-
   useEffect(() => {
     const loadProducts = async () => {
       const fetchedProducts = await fetchProducts();
@@ -33,11 +26,7 @@ const Products: NextPage<Props> = () => {
     };
     loadProducts();
   }, []);
-
-  // function addToCart(productId: string): void {
-  //   throw new Error('Function not implemented.');
-  // }
-
+  
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
@@ -51,9 +40,9 @@ const Products: NextPage<Props> = () => {
       <Header />
 
       <S.MainContent>
-        <SearchForm onSearch={handleSearch} />
+        <SearchForm placeholder= "Search products..." onSearch={handleSearch} />
         {filteredProducts.length > 0 ? (
-          <ProductList products={filteredProducts} onAddToCart={addToCart} />
+          <ProductList filteredProducts={filteredProducts} />
         ) : (
           <p>Product not found.</p>
         )}
@@ -64,13 +53,3 @@ const Products: NextPage<Props> = () => {
 };
 
 export default Products;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const products = await sanityClient.fetch(
-    '*[_type == "product" && !(_id in path("drafts.**"))]'
-  );
-
-  return {
-    props: { products },
-  };
-};

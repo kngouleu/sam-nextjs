@@ -15,7 +15,6 @@ export const LoginContainer = styled.div`
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  // background-color: blue;
   width: 60%;
   position: relative;
 `;
@@ -23,8 +22,6 @@ export const LoginContainer = styled.div`
 export const LoginTitle = styled.h1`
   text-align: center;
   margin: 1rem 0;
-  // color: grey;
-  // background-color: red;
   margin-bottom: 2rem;
 `;
 
@@ -33,7 +30,6 @@ export const LoginBlocksContainer = styled.div`
   justify-content: space-around;
   width: 100%;
   gap: 2rem;
-  // background-color: yellow;
   padding: 2rem 0;
 
   
@@ -41,7 +37,6 @@ export const LoginBlocksContainer = styled.div`
 
 export const LoginBlock1 = styled.div`
   display: flex;
-  // background-color: green;
   flex-direction: column;
   justify-content: center;
   width: 10rem;
@@ -49,10 +44,8 @@ export const LoginBlock1 = styled.div`
 `;
 
 export const LoginBlock2 = styled.div`
-  // background-color: yellow;
   display: flex;
   align-items: center;
-//   border-left: thick double #000;
 `;
 
 export const Block = styled.div`

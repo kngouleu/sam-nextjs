@@ -1,13 +1,8 @@
 import { createContext, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/pages/redux/store/configureStore';
-import { addToCart, removeFromCart, updateCartQuantity, clearCart } from '@/pages/redux/actions/cartActions';
-import {CartItem} from '../pages/redux/types/cartTypes'
-// export interface CartItem extends Product {
-//   quantity: number;
-// }
-
-
+import { RootState } from '@/redux/store/configureStore';
+import { addToCart, removeFromCart, updateCartQuantity, clearCart } from '@/redux/actions/cartActions';
+import {CartItem} from '@/redux/types/cartTypes'
 
 type CartContextType = {
   cart: CartItem[];

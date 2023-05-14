@@ -2,55 +2,19 @@ import React, { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '@/styles/Login.styles';
-// import { auth } from '@/firebase/firebaseConfig';
 import { useDispatch } from 'react-redux';
-import { signInWithEmailAndPassword, signInWithGoogle } from '../pages/redux/actions/authActions';
-import { UserAction } from '../pages/redux/types/authTypes';
+import { signInWithEmailAndPassword, signInWithGoogle } from '../redux/actions/authActions';
+import { UserAction } from '../redux/types/authTypes';
 import { ThunkDispatch } from 'redux-thunk';
-
-
-
-// import {
-//   signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase,
-//   signInWithPopup,
-//   GoogleAuthProvider,
-// } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { RootState } from './redux/store/configureStore';
-// import {SignUpGoogleButton} from '@/styles/Membership.styles';
-// const googleProvider = new GoogleAuthProvider();
-
-// const signInWithGoogle = async () => {
-//   try {
-//     const result = await signInWithPopup(auth, googleProvider);
-//     console.log('Sign in with Google successful:', result);
-//   } catch (error) {
-//     console.error('Sign in with Google failed:', error);
-//   }
-// };
+import { RootState } from '../redux/store/configureStore';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-  // const dispatch = useDispatch();
   const dispatch = useDispatch<ThunkDispatch<RootState, {}, UserAction>>();
-
-
-  // const signInWithEmailAndPassword = async (email: string, password: string) => {
-  //   try {
-  //     const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
-  //     const user = userCredential.user;
-  //     router.push('/profile');
-  //     console.log('Sign in successful:', user);
-  //   } catch (error) {
-  //     console.error('Sign in failed:', error);
-  //     setError('Invalid email or password. Please try again.');
-  //   }
-  // };
-  
-
   const handleLogin = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     dispatch(signInWithEmailAndPassword(email, password));
@@ -58,9 +22,7 @@ const LoginPage: React.FC = () => {
   };
 
   const handleGoogleSignIn = () => {
-    // dispatch(signInWithGoogle());
     dispatch(signInWithGoogle());
-
   };
 
   return (

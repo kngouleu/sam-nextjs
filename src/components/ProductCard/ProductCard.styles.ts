@@ -6,7 +6,6 @@ export const ProductCardContainer = styled.div`
   align-items: center;
   padding: 1rem;
   background-color: #FAF0E6;
-  // border: 1px solid #ccc;
   border-radius: 4px;
   color: black;
   

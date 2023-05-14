@@ -1,12 +1,13 @@
 // components/SearchForm.tsx
 import React, { useState } from 'react';
-import * as S from '@/styles/Home.styles';
+import * as S from './Search.styles';
 
 interface SearchFormProps {
   onSearch: (searchTerm: string) => void;
+  placeholder: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ onSearch, placeholder }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -18,7 +19,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
     <S.SearchForm onSubmit={handleSearch}>
       <S.SearchInput
         type="text"
-        placeholder="Search products..."
+        placeholder= {placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

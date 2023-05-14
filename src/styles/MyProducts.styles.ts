@@ -5,7 +5,6 @@ export const Body = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #FAF0E6;
-
 `;
 
 export const MyProductsContainer = styled.div`
@@ -15,6 +14,21 @@ export const MyProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+export const ProductContainer = styled.div`
+  margin-top: 2rem;
+`;
+
+export const ProductRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const StyledLink = styled.a`
+  text-decoration: none;
+  color: #333;
 `;
 
 export const AddProductButton = styled.button`

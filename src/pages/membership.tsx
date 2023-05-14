@@ -5,10 +5,10 @@ import * as S from '@/styles/Membership.styles';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../pages/redux/store/configureStore';
-import { signInWithGoogle, signUpWithEmailAndPassword } from '../pages/redux/actions/authActions';
+import { RootState } from '../redux/store/configureStore';
+import { signInWithGoogle, signUpWithEmailAndPassword } from '../redux/actions/authActions';
 import { ThunkDispatch } from 'redux-thunk';
-import { UserAction } from './redux/types/authTypes';
+import { UserAction } from '../redux/types/authTypes';
 
 const MembershipPage: React.FC = () => {
   const [name, setName] = useState('');

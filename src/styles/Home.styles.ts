@@ -16,28 +16,6 @@ export const MainContent = styled.main`
   position: relative;
 `;
 
-export const SearchForm = styled.form`
-  margin: 1rem;
-  display: flex; 
-  justify-content: center; 
-  align-item: center;
-  // width: 100%;
-  // position: absolute;
-  // top: 8%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
- 
-`;
-
-export const SearchInput = styled.input`
-  width: auto;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  // position: absolute;
-  // left: 50%;
-
-`;
 
 export const Button = styled.button`
   background-color: #333;
@@ -65,11 +43,13 @@ export const CheckoutButton = styled(Button)`
 `;
 
 export const ClearButton = styled.button`
-  background-color: #607d8b;
+  background-color: #333;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
+  margin-left: 1rem;
   cursor: pointer;
+  width: 10rem;
   transition: background-color 0.3s;
 
   &:hover {

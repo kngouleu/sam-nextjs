@@ -1,18 +1,17 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '@/contexts/auth-context';
 import { NextPage } from 'next';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '@/styles/tunnel.styles';
 import * as T from '@/styles/Home.styles';
-import { FooterContainer } from '@/components/Footer/Footer.styles';
+import { useUser } from '@/contexts/UserContext';
+import { TunnelPageProps } from '@/types/types';
 
-type TunnelPageProps = {};
 
 const TunnelPage: NextPage<TunnelPageProps> = () => {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user } = useUser();
 
   const handleGuestCheckout = () => {
     router.push('/checkout/guestCheckout');
@@ -25,7 +24,6 @@ const TunnelPage: NextPage<TunnelPageProps> = () => {
   return (
     <>
       <S.PageContainer>
-        {/* <Header /> */}
         <S.MainContent>
           <h1>Choose How You Would Like To Check Out</h1>
           {user ? (

@@ -17,10 +17,19 @@ export const CartItem = styled.li`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+
+  /* Set a fixed width for the item name column */
+  & > span:first-of-type {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
 `;
+
 
 export const ItemName = styled.span`
   font-weight: bold;
+  display: flex;
+  flew-wrap: wrap;
 `;
 
 export const ItemPrice = styled.span`

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Product } from '@/types/firestore';
+import { Product } from '@/types/types';
 import * as S from './ProductCard.styles';
 import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (productId: string) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <>
       <Link href={`/products/${product.id}`} style={{ textDecorationLine: 'none' }}>

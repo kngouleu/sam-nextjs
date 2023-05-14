@@ -84,22 +84,6 @@ export const signUpWithEmailAndPassword = (
   }
 };
 
-
-// export const resetPassword = (
-//   email: string
-// ): ThunkAction<void, RootState, null, UserAction> => async (
-//   dispatch: UserDispatch
-// ) => {
-//   try {
-//     dispatch({ type: UserActionTypes.RESET_PASSWORD_REQUEST });
-//     await sendPasswordResetEmailFirebase(auth, email);
-//     dispatch({ type: UserActionTypes.RESET_PASSWORD_SUCCESS });
-//   } catch (error) {
-//     console.error('Reset password failed:', error);
-//     dispatch({ type: UserActionTypes.RESET_PASSWORD_FAILURE, payload: error as string });
-//   }
-// };
-
 export const logout = (): ThunkAction<
   void,
   RootState,

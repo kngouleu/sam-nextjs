@@ -51,8 +51,6 @@ export const CheckoutButton = styled.button`
   }
 `;
 
-export const CheckoutTitle = styled.h1`
-`;
 
 export const SignUpButtonContainer = styled.div`
   display: flex;

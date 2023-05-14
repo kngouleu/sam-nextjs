@@ -1,30 +1,25 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { db } from '@/firebase/firebaseConfig';
-import { Product } from '@/types/firestore';
+import { Product } from '@/types/types';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '../../styles/productId.styles';
-import { imgURL } from '@/utils/image';
 import * as T from '@/styles/Home.styles';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { Firestore, doc, getDoc } from 'firebase/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../redux/actions/cartActions';
-import { RootState } from '../redux/store/configureStore';
+import { addToCart, removeFromCart } from '../../redux/actions/cartActions';
+import { RootState } from '../../redux/store/configureStore';
+import { ProductPageProps } from '@/types/types';
 
-type ProductPageProps = {
-  product: Product;
-};
 
 const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
   const handleSearch = (searchTerm: string) => {
-    // Implement search functionality if needed
   };
   const [notificationMessage, setNotificationMessage] = useState<string | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  // const { addToCart } = useCart();
   const [showNotification, setShowNotification] = useState(false);
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch()
@@ -37,16 +32,6 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
       return () => clearTimeout(timer);
     }
   }, [showNotification]);
-
-  // const handleAddToCart = () => {
-  //   addToCart(product, (added) => {
-  //     if (added) {
-  //       setNotificationMessage("Product added to the cart!");
-  //     } else {
-  //       setNotificationMessage("Error: Could not add product to the cart.");
-  //     }
-  //   });
-  // };
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity: 1 }));
@@ -70,8 +55,6 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
             <S.ProductInfo>
               <S.ProductHeader>
                 <S.ProductTitle>{product.name}</S.ProductTitle>
-                {/* <S.ProductOwner>by {user.displayName}</S.ProductOwner> */}
-                {/* <p>{product.description}</p> */}
                 <S.ProductPrice>${product.price.toFixed(2)}</S.ProductPrice>
               </S.ProductHeader>
               <S.ButtonContainer>
@@ -99,7 +82,6 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const productIds = await db.collection('products').get().then(snapshot => snapshot.docs.map(doc => doc.id));
   const productIds = await getDocs(collection(db, 'products')).then((snapshot: { docs: { id: any; }[]; }) => snapshot.docs.map((doc: { id: any; }) => doc.id));
 
   const paths = productIds.map((productId: any) => ({

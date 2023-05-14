@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '@/styles/AddProduct.styles';
-// import { addProduct } from '../../pages/redux/actions/productActions';
-import { addProduct } from '@/utils/firestore';
 import { uploadImage } from '@/utils/storage';
 import { useRouter } from 'next/router';
 import { storage } from '@/firebase/firebaseConfig';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { useDispatch } from 'react-redux';
 import { AnyAction } from 'redux';
-import { RootState } from '../redux/store/configureStore';
+import { RootState } from '../../redux/store/configureStore';
+import { useUser } from '@/contexts/UserContext';
+import { addProduct } from '@/utils/product';
 
 
 const AddProductPage: React.FC = () => {
@@ -21,7 +21,10 @@ const AddProductPage: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
   const dispatch = useDispatch<ThunkDispatch<RootState, {}, AnyAction>>();
-
+  const { user } = useUser();
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -43,12 +46,11 @@ const handleSubmit = async (e: React.FormEvent) => {
     price: parseFloat(price),
     imageUrl: imageURL,
   };
-  console.log('productData : ', productData);
 
 
   // Try to add the product and handle the result
   try {
-    addProduct(productData);
+    addProduct(productData, user.uid);
     alert('Product added successfully');
     router.push('/products/MyProductsPage');
     console.log('Navigation complete');

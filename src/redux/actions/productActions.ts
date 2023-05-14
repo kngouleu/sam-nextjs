@@ -8,11 +8,10 @@ import {
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_FAILURE,
 } from '../constants/productConstants';
-import { db } from '../../../firebase/firebaseConfig';
-import { Product } from '../../../types/firestore';
+import { db } from '../../firebase/firebaseConfig';
+import { Product } from '../../types/types';
 import { AnyAction } from 'redux';
 import { Firestore, addDoc, getDocs } from 'firebase/firestore';
-// import { ProductData } from '@/utils/firestore';
 
 // Action types
 export interface FetchProductsRequestAction {
@@ -79,6 +78,7 @@ export const fetchProducts = (): ThunkAction<
         description: data.description,
         price: data.price,
         imageUrl: data.imageUrl,
+        userId: ''
       });
     });
 
@@ -93,34 +93,6 @@ export const fetchProducts = (): ThunkAction<
     });
   }
 };
-
-// export const addProduct = (
-//   product: ProductData
-// ): ThunkAction<void, RootState, {}, AnyAction> => async (dispatch) => {
-//   dispatch({
-//     type: ADD_PRODUCT_REQUEST,
-//   });
-
-//   try {
-//     const productRefPromise = addDoc(collection(db, 'products'), product)
-//     productRefPromise.then(productRef => {
-//       console.log('Product added with ID:', productRef.id)
-//     }).catch(error => {
-//       console.error('Error adding product:', error)
-//     })
-//     const productRef = await productRefPromise;
-//     return productRef;
-//     dispatch({
-//       type: ADD_PRODUCT_SUCCESS,
-//       payload: addProduct,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: ADD_PRODUCT_FAILURE,
-//       payload: error as string,
-//     });
-//   }
-// };
 
 function collection(db: Firestore, arg1: string): import("@firebase/firestore").CollectionReference<any> {
     throw new Error('Function not implemented.');
