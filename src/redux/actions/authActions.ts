@@ -4,25 +4,10 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword as createUserWithEmailAndPasswordFirebase,
-  sendPasswordResetEmail as sendPasswordResetEmailFirebase,
 } from 'firebase/auth';
 import { ThunkAction } from 'redux-thunk';
 import  {RootState} from '../store/configureStore';
-import { UserActionTypes, UserDispatch, User, UserError, UserAction, AuthActionTypes, AuthAction } from '../types/authTypes';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAIL,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAIL,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL,
-} from '../constants/authConstants';
+import { UserActionTypes, UserDispatch, UserAction, AuthActionTypes, AuthAction } from '../types/authTypes';
 
 const googleProvider = new GoogleAuthProvider();
 

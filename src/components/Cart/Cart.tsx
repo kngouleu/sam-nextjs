@@ -21,12 +21,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const Cart: React.FC<CartProps> = ({ items }) => {
   const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
-  const [quantitiesToRemove, setQuantitiesToRemove] = useState<Record<string, number>>({});
   const dispatch = useDispatch();
 
-  const handleQuantityToRemoveChange = (itemId: string, value: number) => {
-    setQuantitiesToRemove((prev) => ({ ...prev, [itemId]: value }));
-  };
 
   const handleUpdateQuantity = (itemId: string, quantity: number) => {
     dispatch(updateCartQuantity(itemId, quantity));

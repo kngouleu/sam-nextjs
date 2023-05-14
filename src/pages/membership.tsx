@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '@/styles/Membership.styles';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store/configureStore';
@@ -14,10 +13,8 @@ const MembershipPage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
   const [error, setError] = useState('');
   const dispatch = useDispatch<ThunkDispatch<RootState, {}, UserAction>>();
-  const { auth } = useSelector((state: RootState) => state);
 
   const isStrongPassword = (password: string) => {
     const hasUppercase = /[A-Z]/.test(password);

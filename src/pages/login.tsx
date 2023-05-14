@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
             </S.LoginBlock1>
             <S.Block></S.Block>
             <S.LoginBlock2>
-              <S.LoginGoogleButton onClick={signInWithGoogle}>Log in with Google</S.LoginGoogleButton>
+              <S.LoginGoogleButton onSubmit={handleGoogleSignIn}>Log in with Google</S.LoginGoogleButton>
             </S.LoginBlock2>
           </S.LoginBlocksContainer>
         </S.LoginContainer>

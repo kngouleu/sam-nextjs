@@ -11,16 +11,6 @@ const ProfilePage: React.FC = () => {
   const [balance, setBalance] = useState<number | null>(null);
   const router = useRouter();
 
-  async function fetchBalance() {
-    try {
-      const response = await fetch('/api/user-balance?userId=' + user?.uid);
-      const data = await response.json();
-      setBalance(data.balance);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async function handleWithdraw() {
     try {
       const response = await fetch('/api/withdraw?userId=' + user?.uid);

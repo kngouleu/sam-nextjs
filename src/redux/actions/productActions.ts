@@ -11,7 +11,7 @@ import {
 import { db } from '../../firebase/firebaseConfig';
 import { Product } from '../../types/types';
 import { AnyAction } from 'redux';
-import { Firestore, addDoc, getDocs } from 'firebase/firestore';
+import { Firestore, collection, getDocs } from 'firebase/firestore';
 
 // Action types
 export interface FetchProductsRequestAction {
@@ -62,11 +62,6 @@ export const fetchProducts = (): ThunkAction<
   });
 
   try {
-    // const snapshot = await db.collection('products').get();
-    // const products = snapshot.docs.map((doc: { id: any; data: () => any; }) => ({
-    //   id: doc.id,
-    //   ...doc.data(),
-    // })) as Product[];
     const productsRef = collection(db, 'products');
     const snapshot = await getDocs(productsRef);
     const fetchedProducts: Product[] = [];
@@ -93,7 +88,3 @@ export const fetchProducts = (): ThunkAction<
     });
   }
 };
-
-function collection(db: Firestore, arg1: string): import("@firebase/firestore").CollectionReference<any> {
-    throw new Error('Function not implemented.');
-}

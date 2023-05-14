@@ -1,5 +1,4 @@
 import { CartAction, CartActionTypes, CartItem } from '../types/cartTypes';
-import Cookies from 'js-cookie';
 
 interface CartState {
   cartItems: CartItem[];

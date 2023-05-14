@@ -2,17 +2,11 @@ import React, { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import * as S from '@/styles/Help/Help.styles';
-import SearchForm from '@/components/Search/SearchForm';
 import {  FaArrowRight } from 'react-icons/fa';
 import { GrContact } from 'react-icons/gr';
 import Link from 'next/link';
 
 const Help: React.FC = () => {
-  const [searchValue, setSearchValue] = useState('');
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
 
   return (
     <S.Body>

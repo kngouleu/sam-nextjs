@@ -1,10 +1,7 @@
 // pages/checkout/guestCheckout.tsx
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import * as T from '@/styles/tunnel.styles';
 import * as S from '@/styles/GuestCheckout.styles';
 import ProductCheckout from '@/components/ProductCheckout/ProductCheckout';
 import { useSelector } from 'react-redux';
@@ -62,17 +59,17 @@ const GuestCheckoutPage: React.FC = () => {
                     {!showAddressConfirmation ? (
                     <S.DeliveryForm onSubmit={handleSubmit}>
                         <S.NameInfoContainer>
-                            <S.DeliveryInput type="text" id="firstName" name="firstName" placeholder='First Name*' value={formData.firstName} onChange={handleChange} required />
+                            <S.DeliveryInput type="text" id="firstName" name="firstName" placeholder="First Name*" value={formData.firstName} onChange={handleChange} required />
                             
-                            <S.DeliveryInput type="text" id="lastName" name="lastName" placeholder='Last Name*' value={formData.lastName} onChange={handleChange} required />
+                            <S.DeliveryInput type="text" id="lastName" name="lastName" placeholder="Last Name*" value={formData.lastName} onChange={handleChange} required />
                         </S.NameInfoContainer>
-                        <S.DeliveryInput type="text" id="address" name="address" placeholder='Address*' value={formData.address} onChange={handleChange} required />
+                        <S.DeliveryInput type="text" id="address" name="address" placeholder="Address*" value={formData.address} onChange={handleChange} required />
 
 
                         <S.ContactInfoContainer>
-                            <S.DeliveryInput type="email" id="email" name="email" placeholder='Email*' value={formData.email} onChange={handleChange} required />
+                            <S.DeliveryInput type="email" id="email" name="email" placeholder="Email*" value={formData.email} onChange={handleChange} required />
 
-                            <S.DeliveryInput type="tel" id="phoneNumber" name="phoneNumber" placeholder='Phone Number*' value={formData.phoneNumber} onChange={handleChange} required />
+                            <S.DeliveryInput type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number*" value={formData.phoneNumber} onChange={handleChange} required />
                         </S.ContactInfoContainer>
                         <S.DeliveryFormButtonContainer>
                         <   S.DeliveryFormButton type="submit">Save and continue</S.DeliveryFormButton>
@@ -81,7 +78,7 @@ const GuestCheckoutPage: React.FC = () => {
                     ) : (
                     <div>
                         <h2>Confirm your address</h2>
-                        <p>We couldn't verify your address. Please review it before you continue.</p>
+                        <p>We couldn&apos;t verify your address. Please review it before you continue.</p>
                         <p>
                         You Entered: <br />
                         {formData.address}

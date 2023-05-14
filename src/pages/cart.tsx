@@ -23,9 +23,7 @@ const CartPage: NextPage<CartPageProps> = () => {
     router.push('/checkout/tunnel');
   };
   
-  const handleRemoveFromCart = (productId: string) => {
-    dispatch(removeFromCart(productId));
-  };
+
 
   const handleClearCart = () => {
     dispatch(clearCart());

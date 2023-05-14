@@ -1,9 +1,5 @@
-import { ThunkAction } from 'redux-thunk';
-import { CartAction, CartActionTypes, CartItem, CartState } from '../types/cartTypes';
-import { RootState } from '../store/configureStore';
-import { Product } from '../types/productTypes';
-import { AnyAction, Dispatch } from 'redux';
-import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_CART } from '../constants/cartConstants';
+import { CartAction, CartActionTypes, CartItem } from '../types/cartTypes';
+import { AnyAction } from 'redux';
 
 
 export const addToCart = (item: CartItem): AnyAction => ({

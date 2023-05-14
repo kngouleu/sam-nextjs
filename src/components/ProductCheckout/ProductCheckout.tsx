@@ -1,7 +1,5 @@
 import React from 'react'
 import * as S from './ProductCheckout.styles'
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store/configureStore';
 import { CartProps } from '../Cart/Cart';
 
 
@@ -12,7 +10,7 @@ const ProductCheckout: React.FC<CartProps> = ({ items }) => {
         {items.length > 0 ? (
         <>
             {items.map((item) => (
-            <S.Product>
+            <S.Product key={item.id}>
                 <S.ProductImage src={item.imageUrl} />
                 <S.ProdutCaracteristic>
                     <S.ProductName>{item.name}</S.ProductName>

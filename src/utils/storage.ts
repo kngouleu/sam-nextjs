@@ -8,7 +8,7 @@ export const uploadImage = async (imageFile: File, path: string): Promise<string
   return new Promise((resolve, reject) => {
     uploadTask.on(
       'state_changed',
-      (snapshot) => {
+      () => {
         // Handle the progress of the upload
       },
       (error) => {

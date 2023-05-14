@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import * as S from './Header.styles';
 import { FaShoppingCart, FaUser, FaSignInAlt, FaQuestionCircle, FaBox } from 'react-icons/fa';
 import { useUser } from '@/contexts/UserContext';

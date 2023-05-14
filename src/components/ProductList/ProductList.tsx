@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { db, app } from '@/firebase/firebaseConfig';
+import { db } from '@/firebase/firebaseConfig';
 import { Product } from '@/types/types';
 import ProductCard from '../ProductCard/ProductCard';
 import * as S from './ProductList.styles';

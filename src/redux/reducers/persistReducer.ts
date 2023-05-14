@@ -1,4 +1,3 @@
-import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -10,8 +9,6 @@ const persistConfig = {
   storage,
   whitelist: ['auth', 'cart'],
 };
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 export default rootReducer;
